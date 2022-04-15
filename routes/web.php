@@ -24,7 +24,10 @@ Route::get('/contact', function () {
     return view('contact_page');
 })->name('contact_page');
 
+Route::post('/formSubmit', [\App\Http\Controllers\InquiryController::class, 'store'])
+    ->name('contact-form');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//laravel ui auth routes
+// Auth::routes();
+//
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

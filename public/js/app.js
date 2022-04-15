@@ -5328,6 +5328,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
@@ -5335,33 +5354,37 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      count: 0
+      fullName: '',
+      email: '',
+      phone: '',
+      message: '',
+      errors: [],
+      success: ''
     };
   },
   methods: {
     formSubmit: function formSubmit(e) {
+      var VueApp = this;
       e.preventDefault();
-      var currentObj = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/yourPostApi', {
-        name: this.name,
-        description: this.description
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/formSubmit', {
+        name: VueApp.fullName,
+        email: VueApp.email,
+        phone: VueApp.phone,
+        message: VueApp.message
       }).then(function (response) {
-        currentObj.output = response.data;
+        VueApp.success = response.data.success;
+        VueApp.errors = [];
+        VueApp.fullName = '';
+        VueApp.email = '';
+        VueApp.phone = '';
+        VueApp.message = '';
       })["catch"](function (error) {
-        currentObj.output = error;
+        debugger;
+        var response = error.response.data;
+        VueApp.errors = response.errors;
+        VueApp.success = '';
       });
     }
-  },
-  created: function created() {
-    var _this = this;
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://jsonplaceholder.typicode.com/posts").then(function (response) {
-      debugger; // JSON responses are automatically parsed.
-
-      _this.posts = response.data;
-    })["catch"](function (e) {
-      _this.errors.push(e);
-    });
   }
 });
 
@@ -27978,110 +28001,191 @@ var render = function () {
   return _c("div", { staticClass: "container mx-auto p-8" }, [
     _c(
       "form",
-      { staticClass: "w-full max-w-lg", on: { submit: _vm.formSubmit } },
+      {
+        ref: "contactForm",
+        staticClass: "w-full max-w-lg",
+        on: { submit: _vm.formSubmit },
+      },
       [
+        _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+          _c("div", { staticClass: "w-full md:w-1/2 px-3 mb-6 md:mb-0" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                attrs: { for: "fullName" },
+              },
+              [_vm._v("\n                    Your Name\n                ")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.fullName,
+                  expression: "fullName",
+                },
+              ],
+              staticClass:
+                "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+              attrs: { id: "fullName", type: "text", placeholder: "Your Name" },
+              domProps: { value: _vm.fullName },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.fullName = $event.target.value
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-full md:w-1/2 px-3" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                attrs: { for: "email" },
+              },
+              [_vm._v("\n                    E-mail\n                ")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email",
+                },
+              ],
+              staticClass:
+                "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+              attrs: { id: "email", type: "email", placeholder: "Your Email" },
+              domProps: { value: _vm.email },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+          _c("div", { staticClass: "w-full px-3" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                attrs: { for: "phone" },
+              },
+              [_vm._v("\n                    Phone\n                ")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.phone,
+                  expression: "phone",
+                },
+              ],
+              staticClass:
+                "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+              attrs: { id: "phone", type: "tel", placeholder: "Phone" },
+              domProps: { value: _vm.phone },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.phone = $event.target.value
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+          _c("div", { staticClass: "w-full px-3" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                attrs: { for: "message" },
+              },
+              [_vm._v("\n                    Message\n                ")]
+            ),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.message,
+                  expression: "message",
+                },
+              ],
+              staticClass:
+                "no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none",
+              attrs: { id: "message", placeholder: "Message" },
+              domProps: { value: _vm.message },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.message = $event.target.value
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
+        _c(
+          "div",
+          { staticClass: "py-2" },
+          [
+            _vm.success !== ""
+              ? [_c("p", { domProps: { textContent: _vm._s(_vm.success) } })]
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.errors.length
+              ? [
+                  _c("b", [_vm._v("Please correct the following error(s):")]),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    _vm._l(_vm.errors, function (error) {
+                      return _c("li", [
+                        _c("p", { domProps: { textContent: _vm._s(error) } }),
+                      ])
+                    }),
+                    0
+                  ),
+                ]
+              : _vm._e(),
+          ],
+          2
+        ),
       ]
     ),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full md:w-1/2 px-3 mb-6 md:mb-0" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "fullName" },
-          },
-          [_vm._v("\n                    Your Name\n                ")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: { id: "fullName", type: "text", placeholder: "Your Name" },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-full md:w-1/2 px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "email" },
-          },
-          [_vm._v("\n                    E-mail\n                ")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: { id: "email", type: "email", placeholder: "Your Email" },
-        }),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "subject" },
-          },
-          [_vm._v("\n                    Subject\n                ")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: { id: "subject", type: "text", placeholder: "Subject" },
-        }),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "message" },
-          },
-          [_vm._v("\n                    Message\n                ")]
-        ),
-        _vm._v(" "),
-        _c("textarea", {
-          staticClass:
-            "no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none",
-          attrs: { id: "message", placeholder: "Message" },
-        }),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -28093,13 +28197,11 @@ var staticRenderFns = [
           {
             staticClass:
               "shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded",
-            attrs: { type: "button" },
+            attrs: { type: "submit" },
           },
           [_vm._v("\n                    Send\n                ")]
         ),
       ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "md:w-2/3" }),
     ])
   },
 ]

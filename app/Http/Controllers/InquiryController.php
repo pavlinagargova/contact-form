@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactForm;
+use App\Mail\InquiryForm;
 use App\Models\Inquiry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-class InquiriesController extends Controller
+class InquiryController extends Controller
 {
     public function store( Request $request )
     {
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|max:50',
-        //     'email' => 'required|email|max:50',
-        //     'phone' => 'required',
-        //     'message' => 'required|max:500'
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:50',
+            'email' => 'required|email|max:50',
+            'phone' => 'required',
+            'message' => 'required|max:500'
+        ]);
 
-dd(  $request->validate([
-    '*' => 'required',
-]));
         $errorMessages = $validator->errors()->all();
 
         if ($validator->fails()) {
@@ -32,7 +29,7 @@ dd(  $request->validate([
 
         }
 
-        $contact = new Inq();
+        $contact = new Inquiry();
 
         $contact->name = $request->name;
         $contact->email = $request->email;
@@ -41,7 +38,7 @@ dd(  $request->validate([
 
         $contact->save();
 
-        Mail::send(new ContactForm($contact));
+        Mail::send(new InquiryForm($contact));
 
         return ['success' => 'Thank you for your email!'];
 

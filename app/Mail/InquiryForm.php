@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Inquiry extends Mailable
+class InquiryForm extends Mailable
 {
     use Queueable, SerializesModels;
     public $contact;
@@ -30,7 +30,7 @@ class Inquiry extends Mailable
     public function build()
     {
         return $this->from($this->contact['email'])
-            ->to('dummy@test.com')
+            ->to('mail@example.com')
             ->subject('Message from contact form')
             ->view('contactMail')
             ->with('contact', $this->contact);
