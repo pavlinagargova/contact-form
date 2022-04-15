@@ -19,8 +19,8 @@ class HTTPTest extends TestCase
     // public function testFormSubmitValidationFails()
     // {
     //     $response = $this->post('/formSubmit', [
-    //             'name' => 'Puf',
-    //             'email' => 'pufelina',
+    //             'name' => 'test',
+    //             'email' => 'test',
     //             'phone' => '',
     //             'message' => 'test'
     //     ]);
@@ -30,8 +30,8 @@ class HTTPTest extends TestCase
     public function testFormSubmitValidationSuccess()
     {
         $response = $this->post('/formSubmit', [
-            'name' => 'Puf',
-            'email' => 'pufelina@gmail.com',
+            'name' => 'test',
+            'email' => 'test@gmail.com',
             'phone' => '089558753',
             'message' => 'test'
         ]);
@@ -39,8 +39,8 @@ class HTTPTest extends TestCase
     }
 
     public function testValueSavedToDB() {
-        $name = 'Puf';
-        $email = 'pufelina@gmail.com';
+        $name = 'test';
+        $email = 'test@gmail.com';
         $phone = '089558753';
         $message = 'test';
 
@@ -61,7 +61,7 @@ class HTTPTest extends TestCase
 
     public function testEmailWasSent() {
         Mail::fake();
-        $contact = 'opa@gmail.com';
+        $contact = 'test@gmail.com';
         $receiver = 'mail@example.com';
         Mail::to($receiver)
             ->send(new InquiryForm(['user' => $contact]));
