@@ -16,7 +16,7 @@ class InquiryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:50',
             'email' => 'required|email|max:50',
-            'phone' => 'required',
+            'phone' => 'required|numeric|digits:10',
             'message' => 'required|max:500'
         ]);
 
