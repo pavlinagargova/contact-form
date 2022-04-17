@@ -32,7 +32,7 @@ class HTTPTest extends TestCase
         $response = $this->post('/formSubmit', [
             'name' => 'test',
             'email' => 'test@gmail.com',
-            'phone' => '089558753',
+            'phone' => '0895587532',
             'message' => 'test'
         ]);
         $response->assertValid();
@@ -41,7 +41,7 @@ class HTTPTest extends TestCase
     public function testValueSavedToDB() {
         $name = 'test';
         $email = 'test@gmail.com';
-        $phone = '089558753';
+        $phone = '0895587532';
         $message = 'test';
 
         $data = $this->post('/formSubmit', [
