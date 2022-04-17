@@ -13,14 +13,18 @@ class InquiryController extends Controller
 {
     public function store( Request $request )
     {
+        $messages =  [
+            'required' => 'All fields are required.',
+        ];
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:50',
             'email' => 'required|email|max:50',
             'phone' => 'required|numeric|digits:10',
             'message' => 'required|max:500'
-        ]);
+        ], $messages);
 
-        $errorMessages = $validator->errors()->all();
+        $errorMessages = $validator->errors()->unique();
 
         if ($validator->fails()) {
             return response(['success' => false,

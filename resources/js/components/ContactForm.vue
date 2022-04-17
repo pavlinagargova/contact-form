@@ -112,7 +112,7 @@ export default {
                     VueApp.phone = '';
                     VueApp.message = '';
                 })
-                .catch(function (error) {debugger
+                .catch(function (error) {
                     var response = error.response.data;
                     VueApp.errors = response.errors;
                     VueApp.success = '';
