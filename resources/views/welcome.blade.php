@@ -27,8 +27,9 @@
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <p>Check out my pretty cool contact <a href="{{ route('contact_page') }}">form.</a></p>
-                <img src="/resources/images/messagebox.svg" alt="Messagebox">
+                <a href="{{ route('contact_page') }}">
+                    <img src="/resources/images/meme.jpg" alt="meme">
+                </a>
             </div>
         </div>
     </body>
